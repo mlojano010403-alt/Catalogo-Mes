@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller Mes | Catálogo Completo</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4e342e;
+            --accent: #bcaaa4;
+            --gold: #8d6e63;
+            --bg: #fdfaf9;
+            --white: #ffffff;
+            --whatsapp: #25D366;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--white);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        header p {
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* 🔎 BUSCADOR */
+        .search-container {
+            max-width: 600px;
+            margin: 30px auto 10px;
+            padding: 0 20px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* 🏷 FILTROS */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            background: rgba(253, 250, 249, 0.95);
+            z-index: 1000;
+            backdrop-filter: blur(6px);
+        }
+
+        .btn-filter {
+            padding: 10px 22px;
+            border: 1px solid var(--accent);
+            background: var(--white);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .btn-filter.active,
+        .btn-filter:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* GRID */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 50px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(78, 52, 46, 0.1);
+        }
+
+        .img-wrapper {
+            height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .img-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .title {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 60vh;
+            border-radius: 8px;
+        }
+
+        #caption {
+            width: 85%;
+            max-width: 600px;
+            text-align: center;
+            color: #fff;
+            padding: 30px 20px;
+        }
+
+        .mueble-desc {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .btn-wa-modal {
+            display: inline-flex;
+            align-items: center;
+            background: var(--whatsapp);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            gap: 12px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .btn-wa-modal:hover {
+            background: #128c7e;
+        }
+
+        .close {
+            position: absolute;
+            top: 25px; right: 35px;
+            color: #fff;
+            font-size: 45px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: #888;
+            font-size: 0.85rem;
+            background: var(--white);
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Taller Mes</h1>
+    <p>Mobiliario Exclusivo para la Sociedad</p>
+    <p>Arte & Madera</p>
+</header>
+
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Buscar muebles..." onkeyup="searchFurniture()">
+</div>
+
+<div class="filter-container">
+    <a href="{% url 'catalogo' %}" class="btn-filter {% if not categoria_seleccionada %}active{% endif %}">✨ Todos</a>
+
+    {% for cat in categorias %}
+    <a href="?categoria={{ cat.id }}" class="btn-filter {% if categoria_seleccionada == cat.id|stringformat:'s' %}active{% endif %}">
+        {{ cat.nombre }}
+    </a>
+    {% endfor %}
+</div>
+
+<main class="catalog-grid" id="catalogGrid">
+    {% for mueble in muebles %}
+    <article class="product-card"
+             onclick="openModal('/media/catalogo/{{ mueble.archivo_imagen }}',
+                           '{{ mueble.nombre_mueble|escapejs }}',
+                           '{{ mueble.categoria.nombre|escapejs }}',
+                           '{{ mueble.descripcion|default:"Artesanía fina de alta calidad fabricada en Cuenca."|escapejs }}')">
+
+    <div class="img-wrapper">
+        <img src="/media/catalogo/{{ mueble.archivo_imagen }}" alt="{{ mueble.nombre_mueble }}" loading="lazy">
+    </div>
+
+    <div class="content">
+        <span class="tag">{{ mueble.categoria.nombre }}</span>
+        <h3 class="title">{{ mueble.nombre_mueble }}</h3>
+    </div>
+
+    </article>
+    {% endfor %}
+</main>
+
+<footer>
+    © 2026 Taller Mes - Cuenca, Ecuador
+</footer>
+
+<div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="imgFull">
+    <div id="caption"></div>
+</div>
+
+<script>
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("imgFull");
+    const captionText = document.getElementById("caption");
+
+    function openModal(imgSrc, name, cat, desc) {
+        modal.style.display = "flex";
+        modalImg.src = imgSrc;
+
+        const waUrl = `https://wa.me/593999999999?text=${encodeURIComponent('Hola, me interesa el mueble "' + name + '"')}`;
+
+        captionText.innerHTML = `
+            <span style="color: var(--accent); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">${cat}</span>
+            <h2 style="font-family: 'Playfair Display', serif; margin: 10px 0;">${name}</h2>
+            <div class="mueble-desc">${desc}</div>
+            <a href="${waUrl}" class="btn-wa-modal" target="_blank">
+                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+            </a>
+        `;
+    }
+
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    function searchFurniture() {
+        const term = document.getElementById('searchInput').value.toLowerCase();
+        document.querySelectorAll('.product-card').forEach(card => {
+            const text = card.innerText.toLowerCase();
+            card.style.display = text.includes(term) ? "flex" : "none";
+        });
+    }
+
+    window.onclick = e => { if (e.target == modal) closeModal(); };
+    document.addEventListener('keydown', e => { if (e.key === "Escape") closeModal(); });
+</script>
+
+</body>
+</html>
