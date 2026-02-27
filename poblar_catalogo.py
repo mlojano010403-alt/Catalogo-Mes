@@ -21,6 +21,7 @@ def cargar_datos_reales():
     for cid, nombre in cats_data.items():
         Categoria.objects.get_or_create(id=cid, defaults={'nombre': nombre})
 
+    Mueble.objects.all().delete()
     # 2. Lista Maestra con Extensiones Verificadas (.png) y Reclasificación
     muebles_lista = [
         # --- ALMACENAMIENTO (22) ---
