@@ -288,19 +288,24 @@
     const captionText = document.getElementById("caption");
 
     function openModal(imgSrc, name, cat, desc) {
-        modal.style.display = "flex";
-        modalImg.src = imgSrc;
+    modal.style.display = "flex";
+    modalImg.src = imgSrc;
 
-        const waUrl = `https://wa.me/593999999999?text=${encodeURIComponent('Hola, me interesa el mueble "' + name + '"')}`;
+    // 1. Construimos la dirección completa de la imagen para el mensaje
+    const urlBase = "https://tallermes.pythonanywhere.com";
+    const mensaje = `Hola, me interesa el mueble "${name}". Puedes verlo aquí: ${urlBase}${imgSrc}`;
 
-        captionText.innerHTML = `
-            <span style="color: var(--accent); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">${cat}</span>
-            <h2 style="font-family: 'Playfair Display', serif; margin: 10px 0;">${name}</h2>
-            <div class="mueble-desc">${desc}</div>
-            <a href="${waUrl}" class="btn-wa-modal" target="_blank">
-                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
-            </a>
-        `;
+    // 2. Generamos el enlace de WhatsApp (Recuerda poner tu número real después del 593)
+    const waUrl = `https://wa.me/593999289058?text=${encodeURIComponent(mensaje)}`;
+
+    captionText.innerHTML = `
+        <span style="color: var(--accent); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">${cat}</span>
+        <h2 style="font-family: 'Playfair Display', serif; margin: 10px 0;">${name}</h2>
+        <div class="mueble-desc">${desc}</div>
+        <a href="${waUrl}" class="btn-wa-modal" target="_blank">
+            <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+        </a>
+    `;
     }
 
     function closeModal() {
