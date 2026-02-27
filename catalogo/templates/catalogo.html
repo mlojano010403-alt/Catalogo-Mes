@@ -258,10 +258,19 @@
     {% for mueble in muebles %}
     <article class="product-card"
              onclick="openModal('/media/catalogo/{{ mueble.archivo_imagen }}',
-                           '{{ mueble.nombre_mueble|escapejs }}',
-                           '{{ mueble.categoria.nombre|escapejs }}',
-                           '{{ mueble.descripcion|default:"Mueble artesanal de alta calidad fabricado en Cuenca."|escapejs }}')">
+                       '{{ mueble.nombre_mueble|escapejs }}',
+                       '{{ mueble.categoria.nombre|escapejs }}',
+                       '{% if mueble.descripcion %}{{ mueble.descripcion|escapejs }}{% else %}Mueble artesanal de alta calidad fabricado en Cuenca.{% endif %}')">
 
+        <div class="img-wrapper">
+            <img src="/media/catalogo/{{ mueble.archivo_imagen }}" alt="{{ mueble.nombre_mueble }}" loading="lazy">
+        </div>
+
+        <div class="content">
+            <span class="tag">{{ mueble.categoria.nombre }}</span>
+            <h3 class="title">{{ mueble.nombre_mueble }}</h3>
+        </div>
+    </article>
     <div class="img-wrapper">
         <img src="/media/catalogo/{{ mueble.archivo_imagen }}" alt="{{ mueble.nombre_mueble }}" loading="lazy">
     </div>
