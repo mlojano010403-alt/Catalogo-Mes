@@ -28,23 +28,23 @@
 
         header {
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
             background: var(--white);
             border-bottom: 1px solid #f0f0f0;
         }
 
         header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: var(--primary);
             margin: 0;
         }
 
         header p {
             color: var(--gold);
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 300;
-            margin-top: 10px;
+            margin-top: 5px;
             text-transform: uppercase;
             letter-spacing: 3px;
         }
@@ -65,11 +65,12 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
+        /* 🏷 FILTROS CORREGIDOS */
         .filter-container {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 15px 20px;
+            justify-content: flex-start; /* Cambio de 'center' a 'flex-start' para mostrar desde el inicio */
+            gap: 12px;
+            padding: 15px 25px;
             position: sticky;
             top: 0;
             background: rgba(253, 250, 249, 0.98);
@@ -84,10 +85,10 @@
         .filter-container::-webkit-scrollbar { display: none; }
 
         .btn-filter {
-            padding: 8px 18px;
+            padding: 10px 20px;
             border: 1px solid var(--accent);
             background: var(--white);
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 500;
@@ -97,8 +98,7 @@
             flex-shrink: 0;
         }
 
-        .btn-filter.active,
-        .btn-filter:hover {
+        .btn-filter.active, .btn-filter:hover {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
@@ -107,7 +107,7 @@
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 25px;
             padding: 30px 20px;
             max-width: 1400px;
             margin: 0 auto;
@@ -124,13 +124,18 @@
             cursor: pointer;
         }
 
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(78, 52, 46, 0.1);
+        }
+
         .img-wrapper {
             height: 280px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f9f9f9;
-            padding: 10px;
+            background: #fcfcfc;
+            padding: 15px;
         }
 
         .img-wrapper img {
@@ -147,14 +152,14 @@
         .tag {
             font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             color: var(--accent);
             font-weight: 600;
         }
 
         .title {
-            margin: 5px 0 0;
-            font-size: 1.1rem;
+            margin: 8px 0 0;
+            font-size: 1.15rem;
             color: var(--primary);
             font-family: 'Playfair Display', serif;
         }
@@ -165,17 +170,17 @@
             z-index: 3000;
             left: 0; top: 0;
             width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.92);
+            background-color: rgba(0,0,0,0.94);
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
         .modal-content {
             max-width: 95%;
-            max-height: 50vh;
-            border-radius: 8px;
+            max-height: 55vh;
+            border-radius: 4px;
             object-fit: contain;
         }
 
@@ -189,10 +194,9 @@
 
         .mueble-desc {
             font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            font-weight: 300;
-            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #ccc;
         }
 
         .btn-wa-modal {
@@ -200,35 +204,36 @@
             align-items: center;
             background: var(--whatsapp);
             color: white;
-            padding: 12px 30px;
+            padding: 14px 35px;
             border-radius: 50px;
             font-weight: 600;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
-            transition: background 0.3s;
+            transition: transform 0.2s;
         }
+
+        .btn-wa-modal:active { transform: scale(0.95); }
 
         .close {
             position: absolute;
             top: 20px; right: 25px;
             color: #fff;
-            font-size: 35px;
+            font-size: 40px;
             cursor: pointer;
         }
 
         @media (max-width: 768px) {
-            header { padding: 40px 15px; }
             header h1 { font-size: 2.2rem; }
-            .filter-container { justify-content: flex-start; padding: 12px 15px; }
             .catalog-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
             .img-wrapper { height: 180px; }
+            .title { font-size: 1rem; }
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
-            color: #aaa;
-            font-size: 0.75rem;
+            padding: 50px 20px;
+            color: #999;
+            font-size: 0.8rem;
             background: var(--white);
             border-top: 1px solid #eee;
         }
@@ -260,7 +265,7 @@
              onclick="openModal('/media/catalogo/{{ mueble.archivo_imagen }}',
                        '{{ mueble.nombre_mueble|escapejs }}',
                        '{{ mueble.categoria.nombre|escapejs }}',
-                       '{% if mueble.descripcion %}{{ mueble.descripcion|escapejs }}{% else %}Mueble artesanal de alta calidad fabricado en Cuenca.{% endif %}')">
+                       '{% if mueble.descripcion %}{{ mueble.descripcion|escapejs }}{% else %}Artesanía fina de alta calidad fabricada en Cuenca.{% endif %}')">
 
         <div class="img-wrapper">
             <img src="/media/catalogo/{{ mueble.archivo_imagen }}" alt="{{ mueble.nombre_mueble }}" loading="lazy">
@@ -299,7 +304,7 @@
 
         captionText.innerHTML = `
             <span style="color: var(--accent); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;">${cat}</span>
-            <h2 style="font-family: 'Playfair Display', serif; margin: 8px 0; font-size: 1.5rem;">${name}</h2>
+            <h2 style="font-family: 'Playfair Display', serif; margin: 10px 0; font-size: 1.6rem;">${name}</h2>
             <div class="mueble-desc">${desc}</div>
             <a href="${waUrl}" class="btn-wa-modal" target="_blank">
                 <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
