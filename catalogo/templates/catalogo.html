@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller Mes | Catálogo Completo</title>
+    <title>Taller Mes | Carpintería Fina</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -23,41 +23,41 @@
             background-color: var(--bg);
             margin: 0;
             color: #333;
+            overflow-x: hidden;
         }
 
         header {
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
             background: var(--white);
             border-bottom: 1px solid #f0f0f0;
         }
 
         header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--primary);
             margin: 0;
         }
 
         header p {
             color: var(--gold);
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 300;
             margin-top: 10px;
             text-transform: uppercase;
             letter-spacing: 3px;
         }
 
-        /* 🔎 BUSCADOR */
         .search-container {
             max-width: 600px;
-            margin: 30px auto 10px;
+            margin: 20px auto;
             padding: 0 20px;
         }
 
         #searchInput {
             width: 100%;
-            padding: 15px 25px;
+            padding: 12px 25px;
             border-radius: 30px;
             border: 1px solid #ddd;
             font-size: 1rem;
@@ -65,30 +65,36 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        /* 🏷 FILTROS */
         .filter-container {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
             gap: 10px;
-            padding: 20px;
+            padding: 15px 20px;
             position: sticky;
             top: 0;
-            background: rgba(253, 250, 249, 0.95);
+            background: rgba(253, 250, 249, 0.98);
             z-index: 1000;
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
         }
 
+        .filter-container::-webkit-scrollbar { display: none; }
+
         .btn-filter {
-            padding: 10px 22px;
+            padding: 8px 18px;
             border: 1px solid var(--accent);
             background: var(--white);
-            border-radius: 25px;
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 500;
+            font-size: 0.9rem;
             color: var(--primary);
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .btn-filter.active,
@@ -98,38 +104,33 @@
             border-color: var(--primary);
         }
 
-        /* GRID */
         .catalog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 50px 20px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 30px 20px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .product-card {
             background: var(--white);
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
             transition: all 0.4s ease;
             display: flex;
             flex-direction: column;
             cursor: pointer;
         }
 
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(78, 52, 46, 0.1);
-        }
-
         .img-wrapper {
-            height: 320px;
+            height: 280px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            background: #f9f9f9;
+            padding: 10px;
         }
 
         .img-wrapper img {
@@ -139,58 +140,59 @@
         }
 
         .content {
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
 
         .tag {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             color: var(--accent);
             font-weight: 600;
         }
 
         .title {
-            margin: 0;
-            font-size: 1.25rem;
+            margin: 5px 0 0;
+            font-size: 1.1rem;
             color: var(--primary);
             font-family: 'Playfair Display', serif;
         }
 
-        /* MODAL */
         .modal {
             display: none;
             position: fixed;
             z-index: 3000;
             left: 0; top: 0;
             width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.95);
+            background-color: rgba(0,0,0,0.92);
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
-            max-width: 90%;
-            max-height: 60vh;
+            max-width: 95%;
+            max-height: 50vh;
             border-radius: 8px;
+            object-fit: contain;
         }
 
         #caption {
-            width: 85%;
-            max-width: 600px;
+            width: 90%;
+            max-width: 500px;
             text-align: center;
             color: #fff;
-            padding: 30px 20px;
+            padding: 20px;
         }
 
         .mueble-desc {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
             font-weight: 300;
+            color: #ddd;
         }
 
         .btn-wa-modal {
@@ -198,52 +200,53 @@
             align-items: center;
             background: var(--whatsapp);
             color: white;
-            padding: 15px 40px;
+            padding: 12px 30px;
             border-radius: 50px;
             font-weight: 600;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
             transition: background 0.3s;
         }
 
-        .btn-wa-modal:hover {
-            background: #128c7e;
-        }
-
         .close {
             position: absolute;
-            top: 25px; right: 35px;
+            top: 20px; right: 25px;
             color: #fff;
-            font-size: 45px;
+            font-size: 35px;
             cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 40px 15px; }
+            header h1 { font-size: 2.2rem; }
+            .filter-container { justify-content: flex-start; padding: 12px 15px; }
+            .catalog-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+            .img-wrapper { height: 180px; }
         }
 
         footer {
             text-align: center;
-            padding: 60px 20px;
-            color: #888;
-            font-size: 0.85rem;
+            padding: 40px 20px;
+            color: #aaa;
+            font-size: 0.75rem;
             background: var(--white);
             border-top: 1px solid #eee;
         }
     </style>
 </head>
-
 <body>
 
 <header>
     <h1>Taller Mes</h1>
-    <p>Mobiliario Exclusivo para la Sociedad</p>
     <p>Arte & Madera</p>
 </header>
 
 <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Buscar muebles..." onkeyup="searchFurniture()">
+    <input type="text" id="searchInput" placeholder="Buscar en el catálogo..." onkeyup="searchFurniture()">
 </div>
 
 <div class="filter-container">
     <a href="{% url 'catalogo' %}" class="btn-filter {% if not categoria_seleccionada %}active{% endif %}">✨ Todos</a>
-
     {% for cat in categorias %}
     <a href="?categoria={{ cat.id }}" class="btn-filter {% if categoria_seleccionada == cat.id|stringformat:'s' %}active{% endif %}">
         {{ cat.nombre }}
@@ -257,17 +260,16 @@
              onclick="openModal('/media/catalogo/{{ mueble.archivo_imagen }}',
                            '{{ mueble.nombre_mueble|escapejs }}',
                            '{{ mueble.categoria.nombre|escapejs }}',
-                           '{{ mueble.descripcion|default:"Artesanía fina de alta calidad fabricada en Cuenca."|escapejs }}')">
+                           '{{ mueble.descripcion|default:\'Mueble artesanal de alta calidad fabricado en Cuenca.\'|escapejs }}')">
 
-    <div class="img-wrapper">
-        <img src="/media/catalogo/{{ mueble.archivo_imagen }}" alt="{{ mueble.nombre_mueble }}" loading="lazy">
-    </div>
+        <div class="img-wrapper">
+            <img src="/media/catalogo/{{ mueble.archivo_imagen }}" alt="{{ mueble.nombre_mueble }}" loading="lazy">
+        </div>
 
-    <div class="content">
-        <span class="tag">{{ mueble.categoria.nombre }}</span>
-        <h3 class="title">{{ mueble.nombre_mueble }}</h3>
-    </div>
-
+        <div class="content">
+            <span class="tag">{{ mueble.categoria.nombre }}</span>
+            <h3 class="title">{{ mueble.nombre_mueble }}</h3>
+        </div>
     </article>
     {% endfor %}
 </main>
@@ -291,16 +293,13 @@
         modal.style.display = "flex";
         modalImg.src = imgSrc;
 
-        // 1. Construimos la dirección completa de la imagen para el mensaje
         const urlBase = "https://tallermes.pythonanywhere.com";
-        const mensaje = `Hola, me interesa el mueble "${name}". Puedes verlo aquí: ${urlBase}${imgSrc}`;
-
-        // 2. Generamos el enlace de WhatsApp (Recuerda poner tu número real después del 593)
+        const mensaje = `Hola Taller Mes, me interesa el mueble "${name}". Puedes verlo aquí: ${urlBase}${imgSrc}`;
         const waUrl = `https://wa.me/593999289058?text=${encodeURIComponent(mensaje)}`;
 
         captionText.innerHTML = `
-            <span style="color: var(--accent); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">${cat}</span>
-            <h2 style="font-family: 'Playfair Display', serif; margin: 10px 0;">${name}</h2>
+            <span style="color: var(--accent); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;">${cat}</span>
+            <h2 style="font-family: 'Playfair Display', serif; margin: 8px 0; font-size: 1.5rem;">${name}</h2>
             <div class="mueble-desc">${desc}</div>
             <a href="${waUrl}" class="btn-wa-modal" target="_blank">
                 <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
@@ -308,9 +307,7 @@
         `;
     }
 
-    function closeModal() {
-        modal.style.display = "none";
-    }
+    function closeModal() { modal.style.display = "none"; }
 
     function searchFurniture() {
         const term = document.getElementById('searchInput').value.toLowerCase();
