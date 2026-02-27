@@ -127,3 +127,4 @@ MEDIA_URL = '/media/'
 
 # Ruta física en tu computadora donde se guardarán las carpetas de imágenes
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
